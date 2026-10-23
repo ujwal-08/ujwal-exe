@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                        */
+/* ------------------------------------------------------------------ */
+:root {
+  --c-void: #05070d;
+  --c-ink: #0a0f1c;
+  --c-graphite: #121a2b;
+  --c-cyan: #22d3ee;
+  --c-violet: #a78bfa;
+  --c-frost: #e6f1ff;
+  --c-mute: #8fa3bf;
+  --c-line: rgba(148, 197, 255, 0.14);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-void text-frost font-sans antialiased;
+    margin: 0;
+    min-width: 320px;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: rgba(34, 211, 238, 0.3);
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+  :focus-visible {
+    outline: 2px solid var(--c-cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .label-mono {
+    @apply font-mono text-[11px] uppercase tracking-[0.22em] text-cyan;
+  }
+  .panel {
+    @apply rounded-xl border border-line bg-graphite/60;
+  }
+  .glass {
+    background: rgba(10, 15, 28, 0.72);
+    border: 1px solid var(--c-line);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors;
+  }
+  .btn-primary {
+    @apply btn bg-cyan text-void hover:bg-cyan-soft;
+  }
+  .btn-ghost {
+    @apply btn border border-line text-frost hover:border-cyan/60 hover:text-cyan;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-md border border-line px-2 py-1 font-mono text-[11px] text-mute;
+  }
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(148, 197, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 197, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--c-cyan);
+  color: var(--c-void);
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Effects off, or reduced motion: remove ambient animation. */
+.no-effects *,
+.no-effects *::before,
+.no-effects *::after {
+  animation: none !important;
+  transition-duration: 0.01ms !important;
+}
+.no-effects {
+  scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
